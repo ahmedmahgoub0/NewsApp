@@ -8,11 +8,12 @@ import com.example.newsapp.R
 import com.example.newsapp.databinding.ActivityHomeBinding
 import com.example.newsapp.ui.home.categories.CategoriesFragment
 import com.example.newsapp.ui.home.categories.Category
+import com.example.newsapp.ui.home.categoryDetails.CategoryDetailsFragment
 
 class HomeActivity : AppCompatActivity() {
 
     private lateinit var viewBinding: ActivityHomeBinding
-    val categoryFragmentRef = CategoriesFragment()
+    private val categoryFragmentRef = CategoriesFragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,21 +45,25 @@ class HomeActivity : AppCompatActivity() {
         }
 
         categoryFragmentRef.onCategoryClickListener =
-            CategoriesFragment.OnCategoryClickListener {
-                showCategoryDetailsFragment()
+            CategoriesFragment.OnCategoryClickListener { category->
+                showCategoryDetailsActivity(category)
             }
 
         showFragment(categoryFragmentRef)
-    }
-
-    private fun showCategoryDetailsFragment() {
-        TODO("Not yet implemented")
     }
 
     private fun showFragment(fragment: Fragment) {
         supportFragmentManager
             .beginTransaction()
             .replace(viewBinding.fragmentContainer.id, fragment)
+            .commit()
+    }
+
+    private fun showCategoryDetailsActivity(category: Category){
+        supportFragmentManager
+            .beginTransaction()
+            .replace(viewBinding.fragmentContainer.id, CategoryDetailsFragment.getInstance(category))
+            .addToBackStack(null)
             .commit()
     }
 }

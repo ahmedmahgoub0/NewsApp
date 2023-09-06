@@ -5,7 +5,7 @@ import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 
 @Parcelize
-data class SourcesItem(
+data class Source(
 
 	@field:SerializedName("id")
 	val id: String? = null,
