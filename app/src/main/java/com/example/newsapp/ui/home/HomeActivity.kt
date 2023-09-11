@@ -9,6 +9,7 @@ import com.example.newsapp.databinding.ActivityHomeBinding
 import com.example.newsapp.ui.home.categories.CategoriesFragment
 import com.example.newsapp.ui.home.categories.Category
 import com.example.newsapp.ui.home.categoryDetails.CategoryDetailsFragment
+import com.example.newsapp.ui.home.newsFragment.NewsFragment
 
 class HomeActivity : AppCompatActivity() {
 
@@ -43,13 +44,16 @@ class HomeActivity : AppCompatActivity() {
             viewBinding.root.closeDrawers()
             return@setNavigationItemSelectedListener true
         }
+        viewBinding.menu.setOnClickListener {
+            viewBinding.drawerLayout.open()
+        }
 
-        categoryFragmentRef.onCategoryClickListener =
-            CategoriesFragment.OnCategoryClickListener { category->
-                showCategoryDetailsActivity(category)
-            }
+//        categoryFragmentRef.onCategoryClickListener =
+//            CategoriesFragment.OnCategoryClickListener { category->
+//                showCategoryDetailsActivity(category)
+//            }
 
-        showFragment(categoryFragmentRef)
+        showFragment(NewsFragment())
     }
 
     private fun showFragment(fragment: Fragment) {
@@ -58,6 +62,7 @@ class HomeActivity : AppCompatActivity() {
             .replace(viewBinding.fragmentContainer.id, fragment)
             .commit()
     }
+
 
     private fun showCategoryDetailsActivity(category: Category){
         supportFragmentManager

@@ -11,5 +11,11 @@ data class SourcesResponse(
 	val status: String? = null,
 
 	@field:SerializedName("sources")
-	val sources: List<Source?>? = null
+	val sources: List<Source?>? = null,
+
+	@field:SerializedName("code")
+	val code: String? = null,
+
+	@field:SerializedName("message")
+	val message: String? = null
 ) : Parcelable
