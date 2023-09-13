@@ -18,7 +18,7 @@ class ApiManager {
             return retrofit!!
         }
 
-        fun getApi() :WebServices{
+        fun getApis() :WebServices{
             return getInstance().create(WebServices::class.java)
         }
     }

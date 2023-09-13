@@ -7,39 +7,35 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.newsapp.databinding.FragmentCategoriesBinding
 
-class CategoriesFragment :Fragment() {
-
+class CategoriesFragment : Fragment() {
     lateinit var viewBinding: FragmentCategoriesBinding
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         viewBinding = FragmentCategoriesBinding.inflate(
-            inflater, container, false
+            inflater,
+            container, false
         )
         return viewBinding.root
     }
 
+    val adapter = CategoryAdapter(Category.getCategoriesList())
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        initViews()
-    }
-
-    private fun initViews() {
-        val adapter = CategoryAdapter(Category.getCategoriesList())
         viewBinding.categoriesRv.adapter = adapter
-        adapter.onItemClickListener =
-            CategoryAdapter.OnItemClickListener { position, item ->
+        adapter.onItemClickListener = object : CategoryAdapter.OnItemClickListener {
+            override fun onItemClick(pos: Int, item: Category) {
                 onCategoryClickListener?.onCategoryClick(item)
             }
+        }
     }
 
     var onCategoryClickListener: OnCategoryClickListener? = null
-    fun interface OnCategoryClickListener{
+
+    interface OnCategoryClickListener {
         fun onCategoryClick(category: Category)
     }
-
 }

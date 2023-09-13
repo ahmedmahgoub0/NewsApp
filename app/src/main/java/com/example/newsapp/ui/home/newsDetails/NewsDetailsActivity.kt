@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.bumptech.glide.Glide
 import com.example.newsapp.R
-import com.example.newsapp.api.newsResponse.ArticlesItem
+import com.example.newsapp.api.newsResponse.News
 import com.example.newsapp.databinding.ActivityNewsDetailsBinding
 import com.example.newsapp.ui.Constants
 
@@ -13,7 +13,7 @@ import com.example.newsapp.ui.Constants
 class NewsDetailsActivity : AppCompatActivity() {
 
     private lateinit var viewBinding: ActivityNewsDetailsBinding
-    private var newsItem: ArticlesItem? = null
+    private var newsItem: News? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,9 +45,9 @@ class NewsDetailsActivity : AppCompatActivity() {
     }
     private fun initParams() {
         newsItem = if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU)
-            intent.getParcelableExtra(Constants.NEWS_ITEM_KEY, ArticlesItem::class.java)
+            intent.getParcelableExtra(Constants.NEWS_ITEM_KEY, News::class.java)
         else
-            intent.getParcelableExtra(Constants.NEWS_ITEM_KEY) as ArticlesItem?
+            intent.getParcelableExtra(Constants.NEWS_ITEM_KEY) as News?
     }
 
 

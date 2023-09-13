@@ -6,7 +6,7 @@ import com.example.newsapp.api.sourcesResponse.model.Source
 import com.google.gson.annotations.SerializedName
 
 @Parcelize
-data class ArticlesItem(
+data class News(
 
 	@field:SerializedName("publishedAt")
 	val publishedAt: String? = null,
