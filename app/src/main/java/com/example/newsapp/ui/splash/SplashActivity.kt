@@ -1,5 +1,6 @@
 package com.example.newsapp.ui.splash
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -8,9 +9,10 @@ import android.os.Looper
 import com.example.newsapp.databinding.ActivitySplashBinding
 import com.example.newsapp.ui.home.HomeActivity
 
+@SuppressLint("CustomSplashScreen")
 class SplashActivity : AppCompatActivity() {
 
-    lateinit var viewBinding: ActivitySplashBinding
+    private lateinit var viewBinding: ActivitySplashBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

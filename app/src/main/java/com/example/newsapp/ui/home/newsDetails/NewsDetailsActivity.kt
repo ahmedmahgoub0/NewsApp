@@ -14,6 +14,7 @@ class NewsDetailsActivity : AppCompatActivity() {
 
     private lateinit var viewBinding: ActivityNewsDetailsBinding
     private var newsItem: News? = null
+    private var category: String? = "News App"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,30 +26,28 @@ class NewsDetailsActivity : AppCompatActivity() {
     }
 
     private fun initViews(){
-        setSupportActionBar(viewBinding.toolbar)
-        supportActionBar?.setDisplayShowHomeEnabled(true)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.title = ""
+        viewBinding.arrowBack.setOnClickListener {
+            finish()
+        }
+        viewBinding.toolbarTv.text = category
 
         Glide.with(this)
             .load(newsItem?.urlToImage)
             .centerCrop()
             .placeholder(R.drawable.logo)
             .into(viewBinding.newsImage)
+        viewBinding.newsSource.text = newsItem?.source?.name
         viewBinding.newsTitle.text = newsItem?.title
-        viewBinding.newsDesc.text = newsItem?.description
+        viewBinding.newsTime.text = newsItem?.publishedAt
+        viewBinding.newsContent.text = newsItem?.content
     }
 
-    override fun onSupportNavigateUp(): Boolean {
-        onBackPressedDispatcher.onBackPressed()
-        return true
-    }
     private fun initParams() {
         newsItem = if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU)
             intent.getParcelableExtra(Constants.NEWS_ITEM_KEY, News::class.java)
         else
             intent.getParcelableExtra(Constants.NEWS_ITEM_KEY) as News?
+        category = intent.getStringExtra(Constants.CATEGORY_NAME)
     }
-
 
 }

@@ -8,7 +8,9 @@ import androidx.fragment.app.Fragment
 import com.example.newsapp.databinding.FragmentCategoriesBinding
 
 class CategoriesFragment : Fragment() {
-    lateinit var viewBinding: FragmentCategoriesBinding
+
+    private lateinit var viewBinding: FragmentCategoriesBinding
+    private val adapter = CategoryAdapter(Category.getCategoriesList())
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -20,8 +22,6 @@ class CategoriesFragment : Fragment() {
         )
         return viewBinding.root
     }
-
-    val adapter = CategoryAdapter(Category.getCategoriesList())
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

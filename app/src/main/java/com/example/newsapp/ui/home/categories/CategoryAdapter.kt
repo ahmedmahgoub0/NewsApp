@@ -1,11 +1,9 @@
 package com.example.newsapp.ui.home.categories
 
-import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.example.newsapp.R
 import com.example.newsapp.databinding.ItemCategoryBinding
 
 class CategoryAdapter(val items: List<Category>) :

@@ -9,7 +9,7 @@ import com.example.newsapp.databinding.FragmentSettingsBinding
 
 class SettingsFragment : Fragment() {
 
-    lateinit var viewBinding: FragmentSettingsBinding
+    private lateinit var viewBinding: FragmentSettingsBinding
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
