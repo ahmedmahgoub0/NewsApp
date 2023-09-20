@@ -1,13 +1,16 @@
 package com.example.newsapp.ui.home.categories
 
+import android.os.Parcelable
 import com.example.newsapp.R
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class Category(
     val id: String,
     val name: String,
     val imageId: Int,
     val backgroundColorId: Int
-) {
+): Parcelable {
     companion object {
         fun getCategoriesList(): List<Category>{
             return listOf(

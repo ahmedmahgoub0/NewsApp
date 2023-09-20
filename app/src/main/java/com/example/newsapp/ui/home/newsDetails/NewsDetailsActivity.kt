@@ -8,13 +8,14 @@ import com.example.newsapp.R
 import com.example.newsapp.api.newsResponse.News
 import com.example.newsapp.databinding.ActivityNewsDetailsBinding
 import com.example.newsapp.ui.Constants
+import com.example.newsapp.ui.home.categories.Category
 
 
 class NewsDetailsActivity : AppCompatActivity() {
 
     private lateinit var viewBinding: ActivityNewsDetailsBinding
     private var newsItem: News? = null
-    private var category: String? = "News App"
+    private var category: Category? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,7 +30,7 @@ class NewsDetailsActivity : AppCompatActivity() {
         viewBinding.arrowBack.setOnClickListener {
             finish()
         }
-        viewBinding.toolbarTv.text = category
+        viewBinding.toolbarTv.text = category?.name ;
 
         Glide.with(this)
             .load(newsItem?.urlToImage)
@@ -39,15 +40,20 @@ class NewsDetailsActivity : AppCompatActivity() {
         viewBinding.newsSource.text = newsItem?.source?.name
         viewBinding.newsTitle.text = newsItem?.title
         viewBinding.newsTime.text = newsItem?.publishedAt
-        viewBinding.newsContent.text = newsItem?.content
+        viewBinding.newsDescContent.text = newsItem?.description
+        viewBinding.newsContentInfo.text = newsItem?.content
     }
 
     private fun initParams() {
-        newsItem = if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU)
-            intent.getParcelableExtra(Constants.NEWS_ITEM_KEY, News::class.java)
-        else
-            intent.getParcelableExtra(Constants.NEWS_ITEM_KEY) as News?
-        category = intent.getStringExtra(Constants.CATEGORY_NAME)
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU){
+            newsItem = intent.getParcelableExtra(Constants.NEWS_ITEM_KEY, News::class.java)
+            category = intent.getParcelableExtra(Constants.CATEGORY, Category::class.java)
+        }else {
+            newsItem = intent.getParcelableExtra(Constants.NEWS_ITEM_KEY) as News?
+            category = intent.getParcelableExtra(Constants.CATEGORY) as Category?
+        }
+
+
     }
 
 }

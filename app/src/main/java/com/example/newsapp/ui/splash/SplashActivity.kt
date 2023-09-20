@@ -7,7 +7,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import com.example.newsapp.databinding.ActivitySplashBinding
-import com.example.newsapp.ui.home.HomeActivity
+import com.example.newsapp.ui.home.homeActivity.HomeActivity
 
 @SuppressLint("CustomSplashScreen")
 class SplashActivity : AppCompatActivity() {

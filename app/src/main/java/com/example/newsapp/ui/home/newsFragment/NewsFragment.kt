@@ -8,32 +8,28 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.example.newsapp.api.ApiConstants
-import com.example.newsapp.api.ApiManager
-import com.example.newsapp.api.newsResponse.NewsResponse
 import com.example.newsapp.api.sourcesResponse.model.Source
 import com.example.newsapp.databinding.FragmentNewsBinding
 import com.example.newsapp.ui.Constants
+import com.example.newsapp.ui.home.categories.Category
 import com.example.newsapp.ui.home.newsDetails.NewsDetailsActivity
-import com.google.gson.Gson
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class NewsFragment : Fragment() {
 
     companion object {
-        fun getInstance(source: Source): NewsFragment {
-            val newNewsFragment = NewsFragment()
-            newNewsFragment.source = source;
-            return newNewsFragment
+        fun getInstance(source: Source, category: Category): NewsFragment {
+            val newsFragmentRef = NewsFragment()
+            newsFragmentRef.source = source;
+            newsFragmentRef.category = category
+            return newsFragmentRef
         }
     }
 
-    lateinit var viewModel: NewsViewModel
+    private lateinit var viewModel: NewsViewModel
     private lateinit var viewBinding: FragmentNewsBinding
     private lateinit var newsAdapter: NewsAdapter
     lateinit var source: Source
+    lateinit var category: Category
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,9 +41,7 @@ class NewsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        viewBinding = FragmentNewsBinding.inflate(
-            inflater, container, false
-        )
+        viewBinding = FragmentNewsBinding.inflate(inflater, container, false)
         return viewBinding.root
     }
 
@@ -80,10 +74,9 @@ class NewsFragment : Fragment() {
             NewsAdapter.OnItemClickListener { item ->
                 val intent = Intent(requireActivity(), NewsDetailsActivity::class.java)
                 intent.putExtra(Constants.NEWS_ITEM_KEY, item)
-                intent.putExtra(Constants.CATEGORY_NAME, source.category)
+                intent.putExtra(Constants.CATEGORY, category)
                 startActivity(intent)
             }
     }
-
 
 }

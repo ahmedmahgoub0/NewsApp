@@ -1,4 +1,4 @@
-package com.example.newsapp.ui.home
+package com.example.newsapp.ui.home.homeActivity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -13,13 +13,15 @@ import com.example.newsapp.ui.home.settingsFragment.SettingsFragment
 
 class HomeActivity : AppCompatActivity(),
     CategoriesFragment.OnCategoryClickListener {
+
+    private lateinit var viewBinding: ActivityHomeBinding
+    private val categoriesFragment = CategoriesFragment()
+
     override fun onCategoryClick(category: Category) {
         viewBinding.toolbarTv.text = category.name
         showCategoryDetailsFragment(category)
     }
 
-    lateinit var viewBinding: ActivityHomeBinding
-    private val categoriesFragment = CategoriesFragment()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewBinding = ActivityHomeBinding.inflate(layoutInflater)
@@ -27,6 +29,7 @@ class HomeActivity : AppCompatActivity(),
 
         initViews()
     }
+
 
     private fun initViews() {
         viewBinding.toolbarTv.text = "News App"
@@ -40,10 +43,10 @@ class HomeActivity : AppCompatActivity(),
         viewBinding.navView.setNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.categories -> {
-                    showFragment(categoriesFragment);
+                    showCategoryFragment(categoriesFragment);
                 }
                 R.id.settings -> {
-                    showFragment(SettingsFragment())
+                    showSettingsFragment(SettingsFragment())
                 }
             }
             viewBinding.root.closeDrawers()
@@ -53,10 +56,17 @@ class HomeActivity : AppCompatActivity(),
             viewBinding.drawerLayout.open()
         }
         categoriesFragment.onCategoryClickListener = this
-        showFragment(categoriesFragment)
+        showCategoryFragment(categoriesFragment)
     }
 
-    private fun showFragment(fragment: Fragment) {
+    private fun showCategoryFragment(fragment: Fragment) {
+        supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.fragment_container, fragment)
+            .commit()
+    }
+
+    private fun showSettingsFragment(fragment: Fragment){
         supportFragmentManager
             .beginTransaction()
             .replace(R.id.fragment_container, fragment)
@@ -73,4 +83,5 @@ class HomeActivity : AppCompatActivity(),
             .addToBackStack(null)
             .commit()
     }
+
 }

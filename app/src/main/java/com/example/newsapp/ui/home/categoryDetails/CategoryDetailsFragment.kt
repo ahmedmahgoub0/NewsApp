@@ -33,8 +33,8 @@ class CategoryDetailsFragment : Fragment() {
         }
     }
 
-    lateinit var viewModel: CategoriesDetailsViewModel
-    lateinit var viewBinding: FragmentCategoryDetailsBinding
+    private lateinit var viewModel: CategoriesDetailsViewModel
+    private lateinit var viewBinding: FragmentCategoryDetailsBinding
     lateinit var category: Category
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -76,7 +76,7 @@ class CategoryDetailsFragment : Fragment() {
     fun changeNewsFragment(source: Source) {
         childFragmentManager
             .beginTransaction()
-            .replace(R.id.fragment_news_container, NewsFragment.getInstance(source))
+            .replace(R.id.fragment_news_container, NewsFragment.getInstance(source, category))
             .commit()
     }
 
