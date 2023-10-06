@@ -9,7 +9,6 @@ import com.example.newsapp.databinding.ActivityHomeBinding
 import com.example.newsapp.ui.home.categories.CategoriesFragment
 import com.example.newsapp.ui.home.categories.Category
 import com.example.newsapp.ui.home.categoryDetails.CategoryDetailsFragment
-import com.example.newsapp.ui.home.settingsFragment.SettingsFragment
 
 class HomeActivity : AppCompatActivity(),
     CategoriesFragment.OnCategoryClickListener {
@@ -45,9 +44,6 @@ class HomeActivity : AppCompatActivity(),
                 R.id.categories -> {
                     showCategoryFragment(categoriesFragment);
                 }
-                R.id.settings -> {
-                    showSettingsFragment(SettingsFragment())
-                }
             }
             viewBinding.root.closeDrawers()
             return@setNavigationItemSelectedListener true;
@@ -60,13 +56,6 @@ class HomeActivity : AppCompatActivity(),
     }
 
     private fun showCategoryFragment(fragment: Fragment) {
-        supportFragmentManager
-            .beginTransaction()
-            .replace(R.id.fragment_container, fragment)
-            .commit()
-    }
-
-    private fun showSettingsFragment(fragment: Fragment){
         supportFragmentManager
             .beginTransaction()
             .replace(R.id.fragment_container, fragment)

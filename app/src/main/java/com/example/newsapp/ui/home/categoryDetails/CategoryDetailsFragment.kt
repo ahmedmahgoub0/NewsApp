@@ -105,5 +105,4 @@ class CategoryDetailsFragment : Fragment() {
             })
         viewBinding.tabLayout.getTabAt(0)?.select()
     }
-
 }

@@ -34,8 +34,8 @@ class CategoriesFragment : Fragment() {
     }
 
     var onCategoryClickListener: OnCategoryClickListener? = null
-
     interface OnCategoryClickListener {
         fun onCategoryClick(category: Category)
     }
+
 }

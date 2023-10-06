@@ -9,6 +9,8 @@ import com.example.newsapp.api.newsResponse.News
 import com.example.newsapp.databinding.ActivityNewsDetailsBinding
 import com.example.newsapp.ui.Constants
 import com.example.newsapp.ui.home.categories.Category
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 
 class NewsDetailsActivity : AppCompatActivity() {
